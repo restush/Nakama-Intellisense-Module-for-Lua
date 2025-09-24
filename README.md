@@ -1,19 +1,71 @@
-# Intellisense Module for Lua
+# Nakama Lua Intellisense Module
 
-Since Nakama lacks a native way to provide Intellisense data to Lua modules I decided to build this one in order to help speed up my personal development.
+A maintained fork of [KittySkin/Nakama-Intellisense-Module-for-Lua](https://github.com/KittySkin/Nakama-Intellisense-Module-for-Lua).  
+The original project hasn’t been updated since 2022, and Nakama’s API has evolved since then.  
+This fork brings the module up-to-date for **Nakama (2025)** and introduces an automated way to keep it in sync with the latest docs.
 
-This is also shared on the [Nakama forums.](https://forum.heroiclabs.com/t/nakama-lua-intellisense-implementation/2576)
+---
 
-Without further ado, here it is, with instructions on how to use it.
+## ✨ Features
+- Updated `nakama.lua` with current (2025) Nakama API.  
+- Provides Intellisense for Nakama Lua functions and APIs.  
+- Cross-IDE support via EmmyLua (works in VS Code, IntelliJ, and others).  
+- Added Python scraper `nakama-lua-scraper.py` which parses Nakama’s official documentation and rebuilds `modules/nakama.lua` with up-to-date API signatures and types.
 
-The main objective of this is to add a working Intellisense for Nakama Lua functions, using EmmyLua Intellisense (which is cross IDE enabled).
+Shared originally on the [Nakama forums](https://forum.heroiclabs.com/t/nakama-lua-intellisense-implementation/2576).
 
-To do this we are going to first install the [EmmyLua](https://github.com/EmmyLua) plugin for your IDE.
+---
 
-With the plugin installed you now need to download nakama.lua module from this repo.
+## 📦 Installation
 
-Then add it to your project in order to allow the require(“nakama”) to import it, this will allow the Nakama functions to display Intellisense based on this new added module.
+1. Install the [EmmyLua plugin](https://github.com/EmmyLua) in your IDE of choice.  
+2. Download the **`modules`** folder from this repository (or just grab `modules/nakama.lua`).  
+3. Place it into your project and import it with `require("nakama")`.  
+   This enables Intellisense and autocompletion for Nakama functions.
 
-Before deploying the server always remember to make sure NOT to upload the nakama.lua file since that will break the server framework.
+---
 
-If someone notices any bug on the file, please let me know so I can add or improve already existing Intellisense.
+## 🚀 Example Usage
+
+Once the module is included, your IDE will provide autocomplete hints.  
+For example, when writing Nakama Lua modules:
+
+```lua
+local nk = require("nakama")
+
+---@param context Context
+---@param payload table
+local function my_rpc_func(context, payload)
+    nk.logger_info("Received payload: " .. payload)
+
+    local user_id = context.user_id
+    nk.logger_info("Caller user id: " .. user_id)
+
+    return "Hello from Nakama!"
+end
+
+nk.register_rpc(my_rpc_func, "my_rpc_func")
+```
+Your IDE should now show suggestions for nk.logger_info, nk.register_rpc, and other Nakama APIs.
+
+---
+
+## ⚠️ Important Note
+
+Do **not** deploy the `nakama.lua` file to your production server.  
+It’s only meant for development assistance, and uploading it may break the server runtime.
+
+---
+
+## 🐛 Contributing
+
+If you spot missing APIs, incorrect types, or bugs in the annotations:  
+- Open an [issue](../../issues)  
+- Or submit a pull request  
+
+Your contributions will help keep this Intellisense module up-to-date with Nakama.
+
+---
+
+## 📜 License
+MIT License – feel free to use, modify, and share.
