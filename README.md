@@ -64,8 +64,3 @@ If you spot missing APIs, incorrect types, or bugs in the annotations:
 - Or submit a pull request  
 
 Your contributions will help keep this Intellisense module up-to-date with Nakama.
-
----
-
-## 📜 License
-MIT License – feel free to use, modify, and share.
