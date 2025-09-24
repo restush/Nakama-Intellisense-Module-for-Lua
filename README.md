@@ -36,7 +36,7 @@ local nk = require("nakama")
 ---@param context Context
 ---@param payload table
 local function my_rpc_func(context, payload)
-    nk.logger_info("Received payload: " .. payload)
+    nk.logger_info("Received payload: " .. nk.json_encode(payload))
 
     local user_id = context.user_id
     nk.logger_info("Caller user id: " .. user_id)
